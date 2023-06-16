@@ -2,13 +2,14 @@
 
 /**
  * main - Entry point
- * 
- * Description: use putchar to prints all possible combinations of single-digit numbers.
- * 
+ *
+ * Description: use putchar to prints all possible
+ * combinations of single-digit numbers.
+ *
  * Return: Always 0 (Success)
  */
 
-int main(void) 
+int main(void)
 {
 	int x = 0;
 
@@ -20,7 +21,7 @@ int main(void)
 			putchar(',');
 			putchar(' ');
 		}
-		++x;	
+		++x;
 	}
 	putchar('\n');
 	return (0);
