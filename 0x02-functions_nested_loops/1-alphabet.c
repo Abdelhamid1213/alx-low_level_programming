@@ -1,9 +1,8 @@
 #include "main.h"
 
 /**
- * print_alphabets - print alphabets using _putchar
+ * print_alphabet - use the _putchar function to print the alphabet.
  *
- * Description : use putchar to print a - z.
  */
 
 void print_alphabet(void)
