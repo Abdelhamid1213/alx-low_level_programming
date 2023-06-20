@@ -2,6 +2,8 @@
 
 /**
  * print_alphabets - print alphabets using _putchar
+ *
+ * Description : use putchar to print a - z.
  */
 
 void print_alphabet(void)
