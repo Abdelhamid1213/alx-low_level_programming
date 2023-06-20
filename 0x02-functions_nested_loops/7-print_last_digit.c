@@ -12,7 +12,10 @@ int print_last_digit(int n)
 {
 	int d;
 
-	d = n % 10;
-	_putchar(48+d);
+	if (n < 0)
+		d = -1 * (n % 10);
+	else
+		d = n % 10;
+	_putchar(48 + d);
 	return (d);
 }
