@@ -1,4 +1,5 @@
 #include "main.h"
+#include <unistd.h>
 
 /**
  * print_rev - prints a string, in reverse, followed by a new line
@@ -13,7 +14,9 @@ void print_rev(char *s)
 	while (s[l] != '\0')
 		l++;
 
-	for (int i = l - 1; i >= 0; i--) 
+	int i;
+
+	for (i = l - 1; i >= 0; i--) 
 	{
 		char x = s[i];
 
