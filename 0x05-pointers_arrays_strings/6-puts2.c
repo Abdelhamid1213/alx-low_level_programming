@@ -2,12 +2,13 @@
 #include <unistd.h>
 
 /**
- * _puts - a function that prints a string, followed by a new line, to stdout.
+ * puts2 - prints every other character of a string, starting
+ * with the first character, followed by a new line.
  *
- * @str: string to get printed
+ * @str: string to get half printed
  */
 
-void _puts(char *str)
+void puts2(char *str)
 {
 	while (*str != '\0')
 	{
