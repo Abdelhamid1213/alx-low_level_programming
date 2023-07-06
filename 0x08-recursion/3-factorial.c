@@ -3,9 +3,9 @@
 /**
  * factorial - a function that returns the factorial of a given number.
  *
- * @n : number to return the factorial of.
+ * @n: number
  *
- * Return : factorial if n > 0, 1 if n = 0, -1 if n < 0;
+ * Return: factorial on n
  */
 
 int factorial(int n)
