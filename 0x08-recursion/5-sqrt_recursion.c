@@ -1,30 +1,21 @@
 #include "main.h"
 
 /**
- * _sqrt_recursion_c - a function that do the recursion
+ * sqrt_wrapper - checks the input number from n to the base
  *
- * @n : input number
- * @min: minimum guesses
- * @max: maximum guesses
+ * @n: number is squared and compared against base
+ * @x: base number to check
  *
- * Return: square root of @n or -1
+ * Return: natural square root of number base
  */
 
-int _sqrt_recursion_c(int n, int min, int max)
+int sqrt_wrapper(int n, int x)
 {
-	int guess, guess_square;
-
-	guess = (min + max) / 2;
-	guess_square = guess * guess;
-
-	if (guess_square == n)
-		return (guess);
-	else if (min == max)
+	if (n * n == x)
+		return (n);
+	if (n * n > x)
 		return (-1);
-	else if (guess_square < n)
-		return (_sqrt_recursion_c(n, guess + 1, max));
-	else
-		return (_sqrt_recursion_c(n, min, guess - 1));
+	return (sqrt_wrapper(n + 1, x));
 }
 
 /**
@@ -37,12 +28,5 @@ int _sqrt_recursion_c(int n, int min, int max)
 
 int _sqrt_recursion(int n)
 {
-	if (n == 1)
-		return (1);
-	else if (n == 0)
-		return (0);
-	else if (n < 0)
-		return (-1);
-	else
-		return (_sqrt_recursion_c(n, 1, n));
+	return (sqrt_wrapper(1, n));
 }
