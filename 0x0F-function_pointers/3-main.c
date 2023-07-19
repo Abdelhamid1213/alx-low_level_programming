@@ -3,7 +3,8 @@
 /**
  * main - Entry point
  *
- * @s: char pointer to operator
+ * @argc: number of args
+ * @argv: string of args
  *
  * Return: Success
  */
