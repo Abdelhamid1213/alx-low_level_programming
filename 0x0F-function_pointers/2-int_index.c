@@ -6,6 +6,8 @@
  * @array: array to check
  * @size: size of array
  * @cmp:  pointer to function to compare values
+ *
+ * Return: -1 or index of element in array
  */
 
 int int_index(int *array, int size, int (*cmp)(int))
@@ -21,6 +23,6 @@ int int_index(int *array, int size, int (*cmp)(int))
 			if (cmp(array[i]))
 				return (i);
 		}
-		return (-1);
 	}
+	return (-1);
 }
