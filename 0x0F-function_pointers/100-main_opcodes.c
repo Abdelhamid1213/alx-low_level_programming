@@ -1,11 +1,14 @@
+#include <string.h>
 #include <stdio.h>
+#include <stdlib.h>
+
 /**
  * main - Entry point
  *
  * @argc: number of args
  * @argv: string of args
  *
- * return: 0 Success
+ * Return: 0 Success
  */
 
 int main(int argc, char *argv[])
