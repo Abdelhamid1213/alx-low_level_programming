@@ -1,4 +1,5 @@
 #include "3-calc.h"
+
 /**
  * main - Entry point
  *
@@ -7,7 +8,7 @@
  * Return: Success
  */
 
-int main(int argc, char *argv)
+int main(int argc, char *argv[])
 {
 	int num1, num2, result;
 	char *operator;
@@ -25,7 +26,7 @@ int main(int argc, char *argv)
 		printf("Error\n");
 		exit(99);
 	}
-	if ((operator == '/' || operator == '%') && num2 == 0)
+	if ((*operator == '/' || *operator == '%') && num2 == 0)
 	{
 		printf("Error\n");
 		exit(100);
