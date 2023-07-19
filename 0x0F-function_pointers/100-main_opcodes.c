@@ -2,17 +2,36 @@
 /**
  * main - Entry point
  *
+ * @argc: number of args
+ * @argv: string of args
+ *
  * return: 0 Success
  */
 
-int main() {
-    // Print the opcodes of the main function
-    unsigned char* opcode_ptr = (unsigned char*)main;
-    while (*opcode_ptr != 0xC3) {  // 0xC3 is the opcode for the 'ret' instruction
-        printf("%02x ", *opcode_ptr);
-        opcode_ptr++;
-    }
-    printf("\n");
+int main(int argc, char *argv[])
+{
+	int index, nbytes;
+	char *ptr = (char *) main;
 
-    return 0;
+	if (argc != 2)
+	{
+		printf("Error\n");
+		exit(1);
+	}
+
+	nbytes = atoi(argv[1]);
+	if (nbytes < 0)
+	{
+		printf("Error\n");
+		exit(2);
+	}
+
+	for (index = 0; index < nbytes; index++)
+	{
+		printf("%02x", ptr[index] & 0xFF);
+		if (index != nbytes - 1)
+			printf(" ");
+	}
+	printf("\n");
+	return (0);
 }
