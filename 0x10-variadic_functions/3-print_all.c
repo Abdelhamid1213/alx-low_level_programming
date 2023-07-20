@@ -1,0 +1,52 @@
+#include <stdarg.h>
+#include <stdio.h>
+#include <string.h>
+
+/**
+ * print_strings - prints strings, followed by a new line.
+ *
+ * @format: string of flags
+ */
+
+void print_all(const char * const format, ...)
+{
+	va_list args;
+	int format_len, i, print_seperator;
+	char *str;
+	char *separator = ", ";
+
+	va_start(args, format);
+	format_len = strlen(format);
+	for (i = 0; i < format_len; i++)
+	{
+		switch (format[i])
+		{
+			case 'c':
+				printf("%c", va_arg(args, int));
+				print_seperator = 1;
+				break;
+			case 'i':
+				printf("%d", va_arg(args, int));
+				print_seperator = 1;
+				break;
+			case 'f':
+				printf("%f", va_arg(args, double));
+				print_seperator = 1;
+				break;
+			case 's':
+				str = va_arg(args, char *);
+				if (str == NULL)
+					printf("(nil)");
+				else
+					printf("%s", str);
+				print_seperator = 1;
+				break;
+			default:
+				print_seperator = 0;
+		}
+		if (i < format_len - 1 && print_seperator)
+			printf("%s", separator);
+	}
+	putchar('\n');
+	va_end(args);
+}
