@@ -16,8 +16,7 @@ void print_all(const char * const format, ...)
 	char *separator = ", ";
 
 	va_start(args, format);
-	format_len = strlen(format);
-	for (i = 0; i < format_len; i++)
+	while (format != NULL && format[i] != '\0')
 	{
 		switch (format[i])
 		{
@@ -43,6 +42,7 @@ void print_all(const char * const format, ...)
 				break;
 			default:
 				print_seperator = 0;
+				break;
 		}
 		if (i < format_len - 1 && print_seperator)
 			printf("%s", separator);
