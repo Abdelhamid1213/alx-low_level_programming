@@ -11,7 +11,7 @@
 void print_all(const char * const format, ...)
 {
 	va_list args;
-	int format_len, i, print_seperator;
+	int i, print_seperator;
 	char *str;
 	char *separator = ", ";
 
@@ -45,7 +45,7 @@ void print_all(const char * const format, ...)
 				print_seperator = 0;
 				break;
 		}
-		if (i < format_len - 1 && print_seperator)
+		if (format[i + 1] != '\0' && print_seperator)
 			printf("%s", separator);
 		i++;
 	}
