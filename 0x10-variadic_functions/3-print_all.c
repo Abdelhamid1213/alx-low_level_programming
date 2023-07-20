@@ -46,6 +46,7 @@ void print_all(const char * const format, ...)
 		}
 		if (i < format_len - 1 && print_seperator)
 			printf("%s", separator);
+		i++;
 	}
 	putchar('\n');
 	va_end(args);
