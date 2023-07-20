@@ -3,7 +3,7 @@
 #include <string.h>
 
 /**
- * print_strings - prints strings, followed by a new line.
+ * print_all - prints strings, followed by a new line.
  *
  * @format: string of flags
  */
