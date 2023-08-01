@@ -7,41 +7,40 @@
  * @n: element to add to the new node
  * Return: NULL if anything fails or the address of the new node
  */
+
 listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n)
 {
-	listint_t *new_node, *current;
+	listint_t *aux_node = *head;
+	listint_t *new_node;
 	unsigned int index;
-
-	current = *head;
+	unsigned int cont = 0;
 
 	new_node = malloc(sizeof(listint_t));
-	if ((*head == NULL && idx != 0) || new_node == NULL)
+	if (new_node == NULL)
 		return (NULL);
-
 	new_node->n = n;
-
-	for (index = 0; head != NULL && index < idx - 1; index++)
-	{
-		current = current->next;
-		if (current == NULL)
-			return (NULL);
-	}
 
 	if (idx == 0)
 	{
 		new_node->next = *head;
 		*head = new_node;
-	}
-	else if (current->next)
-	{
-		new_node->next = current->next;
-		current->next = new_node;
-	}
-	else
-	{
-		new_node->next = NULL;
-		current->next = new_node;
+		return (*head);
 	}
 
-	return (new_node);
+	index = idx - 1;
+	while (aux_node && cont != index)
+	{
+		cont++;
+		aux_node = aux_node->next;
+	}
+
+	if (cont == index && aux_node)
+	{
+		new_node->next = aux_node->next;
+		aux_node->next = new_node;
+		return (new_node);
+	}
+
+	free(new_node);
+	return (NULL);
 }
