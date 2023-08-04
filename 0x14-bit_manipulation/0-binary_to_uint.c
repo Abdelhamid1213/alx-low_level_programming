@@ -6,7 +6,7 @@
  * Return: 1 if contain char else 0
  */
 
-unsigned int is_number(char *str)
+unsigned int is_number(const char *str)
 {
 	while (*str != '\0')
 	{
@@ -26,6 +26,8 @@ unsigned int is_number(char *str)
 unsigned int binary_to_uint(const char *b)
 {
 	unsigned int len, sum = 0, v = 1;
+	int i;
+
 	if (!b || !is_number(b))
 		return (0);
 
@@ -38,5 +40,5 @@ unsigned int binary_to_uint(const char *b)
 		v *= 2;
 	}
 
-	return (sum)
+	return (sum);
 }
