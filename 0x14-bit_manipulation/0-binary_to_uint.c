@@ -1,9 +1,9 @@
 #include "main.h"
 
 /**
- * contain_char - check if string contain char
- * @b: string
- * Return: 1 if contain char else 0
+ * is_number - checks if string has only numbers
+ * @str: string to check
+ * Return: 0 is true 1 if false
  */
 
 unsigned int is_number(const char *str)
