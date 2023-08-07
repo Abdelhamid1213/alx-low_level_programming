@@ -1,98 +1,34 @@
 #include "main.h"
 
-#define BUFFER_SIZE 1024
+#define MAXSIZE 1024
+
 
 /**
- * check_args - ..
- * @argc: ..
- */
-
-void check_args(int argc)
-{
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
-}
-
-/**
- * open_files - ..
- * @argv: ..
+ * exit_cp - ..
+ * @error: ..
+ * @str: ..
+ * @fd: ..
  * Return: ..
  */
 
-int open_files(char *argv[])
+int exit_cp(int error, char *str, int fd)
 {
-	int src_fd, dest_fd;
-	mode_t mode = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH;
-
-	src_fd = open(argv[1], O_RDONLY);
-
-	if (src_fd == -1)
+	switch (error)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't read from %s\n", argv[1]);
-		exit(98);
-	}
-
-	dest_fd = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, mode);
-
-	if (dest_fd == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
-
-	return (dest_fd);
-}
-
-/**
- * copy_data - ..
- * @src_fd: ..
- * @dest_fd: ..
- */
-
-void copy_data(int src_fd, int dest_fd)
-{
-	int bytes_read, bytes_written;
-	char buffer[BUFFER_SIZE];
-
-	while ((bytes_read = read(src_fd, buffer, BUFFER_SIZE)) > 0)
-	{
-		bytes_written = write(dest_fd, buffer, bytes_read);
-
-		if (bytes_written == -1)
-		{
-			dprintf(STDERR_FILENO, "Error writing to file\n");
-			exit(99);
-		}
-	}
-
-	if (bytes_read == -1)
-	{
-		dprintf(STDERR_FILENO, "Error reading from file\n");
-		exit(98);
-	}
-}
-
-/**
- * close_files - ..
- * @src_fd: ..
- * @dest_fd: ..
- */
-
-void close_files(int src_fd, int dest_fd)
-{
-	if (close(src_fd) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error closing fd %d\n", src_fd);
-		exit(100);
-	}
-
-	if (close(dest_fd) == -1)
-	{
-		dprintf(STDERR_FILENO, "Error closing fd %d\n", dest_fd);
-		exit(100);
+		case 97:
+			dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+			exit(error);
+		case 98:
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
+			exit(error);
+		case 99:
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
+			exit(error);
+		case 100:
+			dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
+			exit(error);
+		default:
+			return (0);
 	}
 }
 
@@ -105,16 +41,39 @@ void close_files(int src_fd, int dest_fd)
 
 int main(int argc, char *argv[])
 {
-	int src_fd, dest_fd;
+	int file_in, file_out;
+	int read_stat, write_stat;
+	int close_in, close_out;
+	char buffer[MAXSIZE];
 
-	check_args(argc);
+	if (argc != 3)
+		exit_cp(97, NULL, 0);
 
-	src_fd = open(argv[1], O_RDONLY);
-	dest_fd = open_files(argv);
+	file_in = open(argv[1], O_RDONLY);
+	if (file_in == -1)
+		exit_cp(98, argv[1], 0);
 
-	copy_data(src_fd, dest_fd);
+	file_out = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
+	if (file_out == -1)
+		exit_cp(99, argv[2], 0);
 
-	close_files(src_fd, dest_fd);
+	while ((read_stat = read(file_in, buffer, MAXSIZE)) != 0)
+	{
+		if (read_stat == -1)
+			exit_cp(98, argv[1], 0);
+
+		write_stat = write(file_out, buffer, read_stat);
+		if (write_stat == -1)
+			exit_cp(99, argv[2], 0);
+	}
+
+	close_in = close(file_in);
+	if (close_in == -1)
+		exit_cp(100, NULL, file_in);
+
+	close_out = close(file_out);
+	if (close_out == -1)
+		exit_cp(100, NULL, file_out);
 
 	return (0);
 }
