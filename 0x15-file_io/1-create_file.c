@@ -21,7 +21,7 @@ int create_file(const char *filename, char *text_content)
 
 	if (text_content)
 	{
-		size_t text_len = strlen(text_content);
+		ssize_t text_len = strlen(text_content);
 		ssize_t bytes_written = write(f, text_content, text_len);
 
 		if (bytes_written != text_len)
