@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 """.."""
+
+
 def island_perimeter(grid):
     """..."""
+
     perimeter = 0
     for i, _ in enumerate(grid):
         for j, _ in enumerate(grid[i]):
